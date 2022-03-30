@@ -1,0 +1,8 @@
+{
+  "name": "underwater",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Jens Christensen <paviln@outlook.dk>",
+  "license": "MIT",
+  "private": true
+}
