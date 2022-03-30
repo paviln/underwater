@@ -1,0 +1,11 @@
+# Node.js dependency directory
+node_modules/
+
+# altv-server
+cache/
+data/
+modules/
+altv-server.exe
+libnode.dll
+server.log
+update.json

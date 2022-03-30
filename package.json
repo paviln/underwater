@@ -4,5 +4,15 @@
   "main": "index.js",
   "author": "Jens Christensen <paviln@outlook.dk>",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "update": "altv-pkg d release",
+    "start": "./altv-server.exe"
+  },
+  "devDependencies": {
+    "@altv/types-client": "^2.1.1",
+    "@altv/types-server": "^2.2.8",
+    "altv-pkg": "^1.2.0"
+  }
 }
