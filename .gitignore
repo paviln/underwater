@@ -3,6 +3,7 @@ node_modules/
 
 # altv-server
 cache/
+crashdumps
 data/
 modules/
 altv-server.exe
