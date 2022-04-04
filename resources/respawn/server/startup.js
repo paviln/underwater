@@ -1,9 +1,9 @@
 import alt from 'alt-server';
 
 const spawn = {
-  x: -1291.7142333984375,
-  y: 83.43296813964844,
-  z: 54.8916015625,
+  x: 298.8528,
+  y: -584.3472,
+  z: 43.2483
 };
 
 let deadPlayers = [];

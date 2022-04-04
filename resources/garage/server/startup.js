@@ -1,4 +1,4 @@
-import alt, { emitClient, Vehicle } from 'alt-server';
+import alt from 'alt-server';
 import { Vector3 } from 'alt-shared';
 import * as chat from 'chat';
 
@@ -12,7 +12,7 @@ chat.registerCmd('vehicle', (player, modelName) => {
 });
 
 chat.registerCmd('garage', (player) => {
-  emitClient(player, 'garage:show');
+  alt.emitClient(player, 'garage:show');
 });
 
 alt.onClient('garage:spawnVehicle', (player, modelName) => {
@@ -26,7 +26,9 @@ function spawnVehicle(player, modelName) {
 
   let vehicle;
   try {
-    vehicle = new Vehicle(modelName, spawnPos, spawnRot);;
+    vehicle = new alt.Vehicle(modelName, spawnPos, spawnRot);
+    vehicle.lockState = 2;
+    vehicle.setSyncedMeta('owner', player.id);
   } catch (err) {
     console.log(err)
     chat.send(player, 'Invalid vehicle model.');
