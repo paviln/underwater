@@ -24,7 +24,7 @@ alt.on('entityEnterColshape', (colshape, entity) => {
 
   if (entity instanceof alt.Player && entity.vehicle == null) {
     if (type == 'guard') {
-      entity.setMeta('action', 'guard');
+      entity.setMeta('type', 'guard');
       alt.emitClientRaw(entity, 'snackbar:create', 'info', 'Press E key  to open garage!');
       alt.emitClientRaw(entity, 'garage:updateData', colshape.getMeta('garageId'), type);
     }
@@ -33,8 +33,8 @@ alt.on('entityEnterColshape', (colshape, entity) => {
       colshape.setMeta('occupied', true);
     }
     else if (type == 'park') {
-      alt.emitClientRaw(entity.driver, 'snackbar:create', 'info', 'Press E key to park vehicle!');
       alt.emitClientRaw(entity.driver, 'garage:updateData', colshape.getMeta('garageId'), type);
+      alt.emitClientRaw(entity.driver, 'snackbar:create', 'info', 'Press E key to park vehicle!');
     }
   }
 });
@@ -44,6 +44,7 @@ alt.on('entityLeaveColshape', (colshape, entity) => {
 
   if (entity instanceof alt.Player && entity.vehicle == null) {
     if (type == 'guard') {
+      entity.setMeta('type', '');
       alt.emitClientRaw(entity, 'snackbar:remove');
       alt.emitClientRaw(entity, 'garage:updateData', colshape.getMeta('garageId'), '');
     }
@@ -51,6 +52,7 @@ alt.on('entityLeaveColshape', (colshape, entity) => {
     if (type == 'spawn') {
       colshape.setMeta('occupied', false);
     } else if (type == 'park') {
+      alt.emitClientRaw(entity.driver, 'garage:updateData', colshape.getMeta('garageId'), '');
       alt.emitClientRaw(entity.driver, 'snackbar:remove');
     }
   } 
@@ -125,7 +127,10 @@ const getCordinates = (player) => {
 }
 
 alt.onClient('garage:spawnVehicle', (player, modelName, garageId) => {
-  spawnVehicle(player, modelName, garageId);
+  const type = player.getMeta('type');
+  if (type == 'guard') {
+    spawnVehicle(player, modelName, garageId);
+  }
 });
 
 const spawnVehicle = (player, modelName, garageId) => {

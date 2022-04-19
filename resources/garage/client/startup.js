@@ -5,6 +5,7 @@ let webview;
 let garages = [];
 let garageId = '';
 let currentType = '';
+let isGarageOpen = false;
 
 const showGarage = () => {
   webview = new WebView("http://resource/client/html/index.html", false);
@@ -18,10 +19,12 @@ const showGarage = () => {
     alt.showCursor(false);
     alt.toggleGameControls(true);
     alt.emitRaw('snackbar:toogleShow');
+    isGarageOpen = false;
   });
 
   webview.on('garage:spawnVehicle', (modelName) => {
     alt.emitServerRaw('garage:spawnVehicle', modelName, garageId);
+    alt.emitRaw(alt.Player.local, 'snackbar:create', 'success', 'Vehicle has been spawned!');
   });
 };
 
@@ -38,8 +41,11 @@ alt.on('keydown', (key) => {
   if (key == '69') {
     switch (currentType) {
       case 'guard':
-        showGarage();
-        alt.emitRaw('snackbar:toogleShow');
+        if (!isGarageOpen) {
+          isGarageOpen = true;
+          showGarage();
+          alt.emitRaw('snackbar:toogleShow');
+        }
         break;
       case 'park':
         alt.emitServerRaw('garage:removeVehicle');
