@@ -110,10 +110,11 @@ const createGarage = async (player) => {
       spawn: player.getMeta('spawn'),
       park: getCordinates(player),
     }
+    const result = await db().collection('garages').insertOne(garage);
+    garage._id = result.insertedId;
+    createColshapes(garage);
     garages.push(garage);
     alt.emitClientRaw(null, 'garage:update', garages);
-    createColshapes(garage);
-    await db().collection('garages').insertOne(garage);
   }
 }
 
@@ -146,7 +147,6 @@ const spawnVehicle = (player, modelName, garageId) => {
     let garage = garages.find(g => (g._id == garageId));
     spawn = garage.spawn;
     let spawnCol = colshapes.get(garageId).spawnCol;
-  
     let isBussy = spawnCol.getMeta('occupied');
     if (isBussy) return;
   }
