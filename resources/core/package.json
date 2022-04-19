@@ -1,0 +1,11 @@
+{
+  "name": "core",
+  "version": "1.0.0",
+  "main": "server/startup.js",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "mongodb": "^4.5.0"
+  }
+}

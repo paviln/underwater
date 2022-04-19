@@ -1,3 +1,3 @@
-import { drawText2d } from './drawer';
+import { drawText2d, drawMarker } from './drawer';
 
-export { drawText2d };
+export { drawText2d, drawMarker };

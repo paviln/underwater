@@ -1,0 +1,60 @@
+#wrapper {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 20%;
+}
+
+.snackbar {
+  margin-top: 5px;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.success {
+  color: #0f5132;
+  background-color: #d1e7dd;
+  border-color: #0f5132;
+}
+
+.success::before {
+  content: "\f058";
+}
+
+.info {
+  color: #084298;
+  background-color: #cfe2ff;
+  border-color: #084298;
+}
+
+.info::before {
+  content: "\f05a";
+}
+
+.warning {
+  color: #664d03;
+  background-color: #fff3cd;
+  border-color: #664d03;
+}
+
+.error {
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #842029;
+}
+
+.error::before, .warning::before {
+  content: "\f06a";
+}
+
+.success, .info, .warning, .error {
+  font-weight: bolder;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.success::before, .info::before, .warning::before, .error::before {
+  font: var(--fa-font-solid);
+  font-size: 1.4rem;
+  padding-right: 6px;
+}
