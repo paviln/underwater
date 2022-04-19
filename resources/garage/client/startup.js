@@ -24,7 +24,6 @@ const showGarage = () => {
 
   webview.on('garage:spawnVehicle', (modelName) => {
     alt.emitServerRaw('garage:spawnVehicle', modelName, garageId);
-    alt.emitRaw(alt.Player.local, 'snackbar:create', 'success', 'Vehicle has been spawned!');
   });
 };
 
@@ -49,7 +48,7 @@ alt.on('keydown', (key) => {
         break;
       case 'park':
         alt.emitServerRaw('garage:removeVehicle');
-        alt.emitRaw('snackbar:remove');
+        alt.emitRaw('snackbar:remove', 'park');
         currentType = '';
         break;
       default:

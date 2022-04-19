@@ -1,10 +1,19 @@
-alt.on('createSnackbar', (variant, text) => {
+alt.on('createSnackbar', (id, variant, text) => {
   let classes = "snackbar " + variant;
+  if (id == 'timer') {
+    id = Date.now();
+    setTimeout(() => {
+      document.getElementById(id).remove();
+    }, 5000)
+  }
 
-  document.getElementById("wrapper").innerHTML += 
-    "<div class=\"" + classes + "\">" + text + "</div>";
+  let newSnackbar = document.createElement("div");
+  newSnackbar.setAttribute('id', id);
+  newSnackbar.setAttribute('class', classes);
+  newSnackbar.innerText = text;
+  document.getElementById("wrapper").prepend(newSnackbar)
 });
 
-alt.on('removeSnackbar', () => {
-  document.getElementById("wrapper").innerHTML = "";
+alt.on('removeSnackbar', (id) => {
+  document.getElementById(id).remove();
 });

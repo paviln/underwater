@@ -25,7 +25,7 @@ alt.on('entityEnterColshape', (colshape, entity) => {
   if (entity instanceof alt.Player && entity.vehicle == null) {
     if (type == 'guard') {
       entity.setMeta('type', 'guard');
-      alt.emitClientRaw(entity, 'snackbar:create', 'info', 'Press E key  to open garage!');
+      alt.emitClientRaw(entity, 'snackbar:create', type, 'info', 'Press E key  to open garage!');
       alt.emitClientRaw(entity, 'garage:updateData', colshape.getMeta('garageId'), type);
     }
   } else if (entity instanceof alt.Vehicle) {
@@ -34,7 +34,7 @@ alt.on('entityEnterColshape', (colshape, entity) => {
     }
     else if (type == 'park') {
       alt.emitClientRaw(entity.driver, 'garage:updateData', colshape.getMeta('garageId'), type);
-      alt.emitClientRaw(entity.driver, 'snackbar:create', 'info', 'Press E key to park vehicle!');
+      alt.emitClientRaw(entity.driver, 'snackbar:create', type, 'info', 'Press E key to park vehicle!');
     }
   }
 });
@@ -45,7 +45,7 @@ alt.on('entityLeaveColshape', (colshape, entity) => {
   if (entity instanceof alt.Player && entity.vehicle == null) {
     if (type == 'guard') {
       entity.setMeta('type', '');
-      alt.emitClientRaw(entity, 'snackbar:remove');
+      alt.emitClientRaw(entity, 'snackbar:remove', type);
       alt.emitClientRaw(entity, 'garage:updateData', colshape.getMeta('garageId'), '');
     }
   } else if (entity instanceof alt.Vehicle) {
@@ -53,7 +53,7 @@ alt.on('entityLeaveColshape', (colshape, entity) => {
       colshape.setMeta('occupied', false);
     } else if (type == 'park') {
       alt.emitClientRaw(entity.driver, 'garage:updateData', colshape.getMeta('garageId'), '');
-      alt.emitClientRaw(entity.driver, 'snackbar:remove');
+      alt.emitClientRaw(entity.driver, 'snackbar:remove', type);
     }
   } 
 });
@@ -155,6 +155,7 @@ const spawnVehicle = (player, modelName, garageId) => {
     vehicle = new alt.Vehicle(modelName, spawn.pos, spawn.rot);
     vehicle.lockState = 2;
     vehicle.setSyncedMeta('owner', player.id);
+    alt.emitClientRaw(player, 'snackbar:create', 'timer', 'success', 'Vehicle has been spawned!');
   } catch (err) {
     console.log(err)
     chat.send(player, 'Invalid vehicle model.');

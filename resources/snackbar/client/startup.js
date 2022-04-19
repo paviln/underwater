@@ -13,26 +13,25 @@ alt.onServer('snackbar:hide', () => {
   }
 });
 
-alt.onServer('snackbar:create', (variant, text) => {
+alt.onServer('snackbar:create', (id, variant, text) => {
   if (!webview) {
     webview = new alt.WebView("http://resource/client/web/index.html", false);
   }
 
-  webview.emit('createSnackbar', variant, text);
+  webview.emit('createSnackbar', id, variant, text);
 });
 
 alt.on('snackbar:toogleShow', () => {
   if (webview) {
     webview.isVisible = !webview.isVisible;
-
   }
 });
 
-alt.onServer('snackbar:remove', () => {
-  webview.emit('removeSnackbar');
+alt.onServer('snackbar:remove', (id) => {
+  webview.emit('removeSnackbar', id);
 });
 
-alt.on('snackbar:remove', () => {
-  webview.emit('removeSnackbar');
+alt.on('snackbar:remove', (id) => {
+  webview.emit('removeSnackbar', id);
 });
 
