@@ -174,16 +174,16 @@ const createColshapes = (garage) => {
   let spawn = garage.spawn;
   let park = garage.park;
 
-  let guardCol = new alt.ColshapeSphere(guard.pos.x, guard.pos.y + 0.75, guard.pos.z, 1);
+  let guardCol = new alt.ColshapeSphere(guard.pos.x, guard.pos.y, guard.pos.z, 1);
   guardCol.setMeta('type', 'guard');
   guardCol.setMeta('garageId', id);
 
-  let spawnCol = new alt.ColshapeSphere(spawn.pos.x, spawn.pos.y + 0.75, spawn.pos.z, 5);
+  let spawnCol = new alt.ColshapeSphere(spawn.pos.x, spawn.pos.y, spawn.pos.z, 5);
   spawnCol.setMeta('type', 'spawn');
   spawnCol.setMeta('occupied', false);
   spawnCol.setMeta('garageId', id);
 
-  let parkCol = new alt.ColshapeSphere(park.pos.x, park.pos.y + 0.75, park.pos.z, 1);
+  let parkCol = new alt.ColshapeSphere(park.pos.x, park.pos.y, park.pos.z, 1);
   parkCol.setMeta('type', 'park');
   parkCol.setMeta('garageId', id);
 

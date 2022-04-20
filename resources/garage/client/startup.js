@@ -48,7 +48,6 @@ alt.on('keydown', (key) => {
         break;
       case 'park':
         alt.emitServerRaw('garage:removeVehicle');
-        alt.emitRaw('snackbar:remove', 'park');
         currentType = '';
         break;
       default:
@@ -75,7 +74,7 @@ alt.everyTick(() => {
 const drawGarage = (pos) => {
   utils.drawMarker(
     1, 
-    new alt.Vector3(pos.x, pos.y + 0.75, pos.z - 1), 
+    new alt.Vector3(pos.x, pos.y, pos.z - 1), 
     new alt.Vector3(0, 0, 0), 
     new alt.Vector3(0, 0, 0), 
     new alt.Vector3(1.5, 1.5, 0.75), 
