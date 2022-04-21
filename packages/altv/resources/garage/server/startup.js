@@ -1,6 +1,6 @@
 import alt from 'alt-server';
 import * as chat from 'chat';
-import { db, connect } from './db';
+import { db, connect } from 'db';
 
 let garages = [];
 let colshapes = new Map();
@@ -74,7 +74,6 @@ chat.registerCmd('garage', (player, option) => {
   if (user.isAdmin) {
     switch (option) {
       case "show":
-        showGarage(player);
         break;
       case "create":
         createGarage(player);
@@ -86,14 +85,13 @@ chat.registerCmd('garage', (player, option) => {
   }
 });
 
-const showGarage = (player, garageId) => {
-  if (garageId === undefined) {
-    spawn = {
-      pos: player.pos,
-      rot: player.rot,
-    };
-  }
-  alt.emitClient(player, 'garage:show', garageId);
+alt.onClient('garage:showGarage', (player, garageId) => {
+  showGarage(player, garageId);
+});
+
+const showGarage = async (player, garageId) => {
+  let vehicles = await db().collection('vehicles').find({}).toArray();
+  alt.emitClient(player, 'garage:show', vehicles, garageId);
 }
 
 const createGarage = async (player) => {

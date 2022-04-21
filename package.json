@@ -1,26 +1,15 @@
 {
   "name": "underwater",
   "version": "1.0.0",
-  "main": "index.js",
+  "repository": "https://github.com/paviln/underwater.git",
   "author": "Jens Christensen <paviln@outlook.dk>",
   "license": "MIT",
   "private": true,
-  "type": "module",
+  "workspaces": [
+    "packages/db",
+    "packages/altv"
+  ],
   "scripts": {
-    "update": "altv-pkg d release",
-    "start": "npm run dev",
-    "dev": "nodemon -e js,html,css --watch \"./resources/**\" --exec \"altv-server.exe\""
-  },
-  "devDependencies": {
-    "@altv/types-client": "^2.1.4",
-    "@altv/types-natives": "^1.4.4",
-    "@altv/types-server": "^2.2.8",
-    "@altv/types-shared": "^1.2.1",
-    "@altv/types-webview": "^1.0.2",
-    "altv-pkg": "^1.2.0",
-    "nodemon": "^2.0.15"
-  },
-  "dependencies": {
-    "mongodb": "^4.5.0"
+    "start": "cd packages/altv && yarn start"
   }
 }

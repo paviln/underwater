@@ -6,6 +6,7 @@ import { utils } from 'core';
 let webview;
 let garages = [];
 let garageId = '';
+let vehicles = [];
 let currentType = '';
 let isGarageOpen = false;
 
@@ -15,6 +16,7 @@ const showGarage = () => {
   webview.focus();
   alt.showCursor(true);
   alt.toggleGameControls(false);
+  webview.emit('showVehicles', vehicles);
 
   webview.on('garage:close', () => {
     webview.destroy();
@@ -38,13 +40,19 @@ alt.onServer('garage:updateData', (id, type) => {
   currentType = type;
 });
 
+alt.onServer('garage:show', (veh, id) => {
+  vehicles = veh;
+  garageId = id;
+  showGarage();
+});
+
 alt.on('keydown', (key) => {
   if (key == '69') {
     switch (currentType) {
       case 'guard':
         if (!isGarageOpen) {
           isGarageOpen = true;
-          showGarage();
+          alt.emitServerRaw('garage:showGarage', garageId);
           alt.emitRaw('snackbar:toogleShow');
         }
         break;

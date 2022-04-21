@@ -1,0 +1,42 @@
+body {
+  padding: 100px;
+}
+
+.container {
+  padding: 0px 15px 0px 15px;
+}
+
+.panel {
+  background-color: #1e1e1e;
+  border-radius: 5px;
+}
+
+.panel .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.panel .header .close {
+  margin: 15px 0 15px 0;
+  padding: 0;
+  background-color: transparent;
+  border-width: 0;
+}
+
+.panel .body {
+
+}
+
+.panel .panel-bottom {
+  display: flex;
+  padding-bottom: 15px;
+}
+
+.button {
+  background-color: #101010;
+  padding: 10px 20px;
+  border: #000;
+  border-radius: 0;
+  border-width: 1;
+}

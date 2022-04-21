@@ -1,5 +1,5 @@
 import alt from 'alt-server';
-import { db, connect } from './db';
+import { db, connect } from 'db';
 
 alt.on('resourceStart', () => {
   connect();

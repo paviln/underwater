@@ -1,7 +1,7 @@
 import alt from 'alt-server';
 import * as chat from 'chat';
 import { ObjectId } from 'mongodb';
-import { db, connect } from './db';
+import { db, connect } from 'db';
 
 alt.on('resourceStart', () => {
   connect();

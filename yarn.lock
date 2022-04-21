@@ -3,9 +3,9 @@
 
 
 "@altv/types-client@^2.1.4":
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/@altv/types-client/-/types-client-2.1.4.tgz#02e4a5e4a981487c9fc8c6ab9d3d431d212c0e90"
-  integrity sha512-k8qOVy0M1HwbrREYRSYdQZVcXSLmxf4DZuRkMH2YMysfz052rac6qLZ9YZS8tZ49anaS0iWfnrFtI2DZuVIU/Q==
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@altv/types-client/-/types-client-2.1.5.tgz#6a4abdc2a3c722f22e6d006cfc538f2073826339"
+  integrity sha512-Afqp6FgM1fs7oED05RgAlYjx5GizF5/GseBioKSQ1NQYeIcRHh2UC3dn9ieQVyxEl498E+RfLxTAnvvhzHJe3Q==
 
 "@altv/types-natives@^1.4.4":
   version "1.4.4"
@@ -13,9 +13,9 @@
   integrity sha512-qcIPhpRAhGnErtf3p1iVGL6CIUJWc1IdYJl6K9T5c7W8Nd9RM2cv4JIyQg3TTXLiu+1gAZlkD8KyYKIfs5BqnQ==
 
 "@altv/types-server@^2.2.8":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@altv/types-server/-/types-server-2.3.1.tgz#b1929740611a29202db7e769bfc2a74d725ba0ea"
-  integrity sha512-TVYjiTdVg5D8sKbwpiWX5Yj4eboPL/+NEa9a5WWsUHt8xsTUxNSK+/UVVvIAIg3Iyfa+GYUYp7L+Q9KUrFS3hA==
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@altv/types-server/-/types-server-2.3.2.tgz#711ee72c4b40650a97581a8dd56af93c4b8c05a8"
+  integrity sha512-RtwFyRY5oA7XxLgOc3GP9TwzjKLWEZ/EtixgIoeSZte+Fx6WhWtu1K3xPg3O4wN/iSB44zIKaxKUAKWo2k6WZA==
 
 "@altv/types-shared@^1.2.1":
   version "1.2.3"
