@@ -155,6 +155,7 @@ const spawnVehicle = (player, modelName, garageId) => {
     vehicle = new alt.Vehicle(modelName, spawn.pos, spawn.rot);
     vehicle.lockState = 2;
     vehicle.setSyncedMeta('owner', player.id);
+    vehicle.sirenActive = true;
     alt.emitClientRaw(player, 'snackbar:create', 'timer', 'success', 'Vehicle has been spawned!');
   } catch (err) {
     console.log(err)

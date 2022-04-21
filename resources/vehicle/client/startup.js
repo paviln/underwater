@@ -1,4 +1,6 @@
+/// <reference types="@altv/types-server" />
 import alt from 'alt-client';
+import * as native from 'natives';
 
 alt.on('keydown', (key) => {
   let player = alt.Player;
@@ -13,6 +15,22 @@ alt.on('keydown', (key) => {
         toggleVehicleLocks(vehicle);
       }
     }
+  }
+});
+
+alt.onServer('vehicle:lockEffect', (vehicle, isLocked) => {
+  native.startVehicleHorn(vehicle, 500, alt.hash('HELDDOWN'), false);
+  vehicle.indicatorLights = 4;
+
+  if(isLocked) {
+    setTimeout(() => {
+      native.startVehicleHorn(vehicle, 500, alt.hash('HELDDOWN'), false);
+      vehicle.indicatorLights = 0;
+    }, 1000);
+  } else {
+    setTimeout(() => {
+      vehicle.indicatorLights = 0;
+    }, 500);
   }
 });
 

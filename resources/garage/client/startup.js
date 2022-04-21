@@ -1,4 +1,6 @@
+/// <reference types="@altv/types-server" />
 import alt, { WebView } from 'alt-client';
+import * as native from 'natives';
 import { utils } from 'core';
 
 let webview;
@@ -63,15 +65,15 @@ alt.everyTick(() => {
   garages.forEach(garage => {
     if (player.pos.distanceTo(garage.park.pos) < 50) {
       if (isInVehicle) {
-        drawGarage(garage.park.pos);
+        drawMarker(garage.park.pos);
       } else {
-        drawGarage(garage.guard.pos);
+        drawMarker(garage.guard.pos);
       }
     }
   });
 });
 
-const drawGarage = (pos) => {
+const drawMarker = (pos) => {
   utils.drawMarker(
     1, 
     new alt.Vector3(pos.x, pos.y, pos.z - 1), 
