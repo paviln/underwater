@@ -148,7 +148,10 @@ const spawnVehicle = (player, modelName, garageId) => {
     spawn = garage.spawn;
     let spawnCol = colshapes.get(garageId).spawnCol;
     let isBussy = spawnCol.getMeta('occupied');
-    if (isBussy) return;
+    if (isBussy) {
+      alt.emitClientRaw(player, 'snackbar:create', 'timer', 'error', 'Please remove vehicle(s) from spawn, before requesting a vehicle!');
+      return;
+    }
   }
 
   try {
