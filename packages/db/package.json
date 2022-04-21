@@ -2,5 +2,10 @@
   "name": "db",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "mongodb": "^4.5.0"
+  }
 }

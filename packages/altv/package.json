@@ -4,6 +4,7 @@
   "author": "Jens Christensen <paviln@outlook.dk>",
   "license": "MIT",
   "type": "module",
+  "private": true,
   "scripts": {
     "update": "altv-pkg d release",
     "start": "npm run dev",
@@ -19,7 +20,6 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
-    "db": "1.0.0",
-    "mongodb": "^4.5.0"
+    "db": "1.0.0"
   }
 }
