@@ -1,4 +1,6 @@
+/// <reference types="@altv/types-server" />
 import alt from 'alt-server';
+import * as chat from 'chat';
 
 const spawn = {
   x: 298.8528,
@@ -21,15 +23,36 @@ alt.on('playerDeath', (player) => {
 
 alt.onClient('respawn:hospital', (player) => {
   if (Date.now() - deadPlayers[player.id] >= RESPAWN_TIME) {
-    // Check if the player still has an entry.
-    if (deadPlayers[player.id]) {
-      delete deadPlayers[player.id];
-    }
-    // Check if the player hasn't just left the server yet.
-    if (!player || !player.valid) {
-      return;
-    }
-    player.model = `mp_m_freemode_01`;
-    player.spawn(spawn.x, spawn.y, spawn.z, 0);
+    respawnPlayer(player, spawn);
   }
 });
+
+// Admin revive player command
+chat.registerCmd('revive', (player, option) => {
+  const user = player.getMeta('user');
+  const pos = player.pos;
+  if (user.isAdmin) {
+    switch (option) {
+      case "me":
+        player.setMeta('revived', true);
+        alt.emitClientRaw(player, 'respawn:deathRemove');
+        respawnPlayer(player, pos);
+        break;
+      default:
+        break;
+    }
+  }
+});
+
+const respawnPlayer = (player, pos) => {
+  // Check if the player still has an entry.
+  if (deadPlayers[player.id]) {
+    delete deadPlayers[player.id];
+  }
+  // Check if the player hasn't just left the server yet.
+  if (!player || !player.valid) {
+    return;
+  }
+  player.model = `mp_m_freemode_01`;
+  player.spawn(pos.x, pos.y, pos.z, 0);
+}

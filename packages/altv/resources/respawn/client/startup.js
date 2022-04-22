@@ -5,6 +5,7 @@ import { utils } from 'core';
 let respawnCountdown;
 let showRespawnCountdown = false;
 let showRespawnControl = false;
+let respawnInterval;
 
 alt.everyTick(() => {
   if (showRespawnCountdown) {
@@ -22,7 +23,7 @@ alt.onServer('respawn:death', (time) => {
   respawnCountdown = time / 60000;
   showRespawnCountdown = true;
 
-  let respawnInterval = alt.setInterval(() => {
+  respawnInterval = alt.setInterval(() => {
     respawnCountdown = respawnCountdown - 1;
     if (respawnCountdown <= 0) {
       showRespawnCountdown = false;
@@ -31,3 +32,10 @@ alt.onServer('respawn:death', (time) => {
     }
   }, 60000);
 });
+
+alt.onServer('respawn:deathRemove', () => {
+  showRespawnCountdown = false;
+  showRespawnControl  = false;
+  alt.clearInterval(respawnInterval);
+});
+
