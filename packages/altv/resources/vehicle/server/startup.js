@@ -1,3 +1,4 @@
+/// <reference types="@altv/types-server" />
 import alt from 'alt-server';
 
 alt.onClient('vehicle:toggleVehicleLocks', (player, vehicle) => {

@@ -1,6 +1,16 @@
-/// <reference types="@altv/types-server" />
+/// <reference types="@altv/types-client" />
 import alt from 'alt-client';
 import * as native from 'natives';
+
+alt.everyTick(() => {
+  if (alt.Player.local.vehicle !== null) {
+    const roll = native.getEntityRoll(alt.Player.local.vehicle.scriptID);
+    if (roll > 75 || roll < -75) {
+      native.disableControlAction(2, 59, true); // disable left/right
+      native.disableControlAction(2, 60, true); // disable up/down
+    }
+  }
+});
 
 alt.on('keydown', (key) => {
   let player = alt.Player;
