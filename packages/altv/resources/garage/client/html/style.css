@@ -8,24 +8,26 @@ body {
 
 .panel {
   background-color: #1e1e1e;
-  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #000;
+  border-radius: 10px;
 }
 
 .panel .header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-start;
-}
-
-.panel .header .close {
-  margin: 15px 0 15px 0;
-  padding: 0;
-  background-color: transparent;
-  border-width: 0;
+  padding: 0px 15px 0px 15px;
+  color: lightgray;
+  display: flex;
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: #000;
 }
 
 .panel .body {
-
+  padding-top: 15px;
 }
 
 .panel .panel-bottom {
@@ -35,8 +37,27 @@ body {
 
 .button {
   background-color: #101010;
+  color: lightgray;
   padding: 10px 20px;
   border: #000;
   border-radius: 0;
   border-width: 1;
+  cursor: pointer;
+}
+
+#vehicles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.card {
+  background-color: darkslategray;
+  padding: 15px;
+}
+
+.card .bottom {
+  display: flex;
+  justify-content: center;
 }

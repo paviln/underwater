@@ -58,13 +58,13 @@ alt.on('entityLeaveColshape', (colshape, entity) => {
   } 
 });
 
-chat.registerCmd('vehicle', (player, modelName) => {
-  if (!modelName) {
-    chat.send(player, '/vehicle [modelName]');
+chat.registerCmd('vehicle', (player, model) => {
+  if (!model) {
+    chat.send(player, '/vehicle [model]');
     return;
   }
 
-  spawnVehicle(player, modelName);
+  spawnVehicle(player, model);
 });
 
 // Handle garage commands
@@ -90,7 +90,13 @@ alt.onClient('garage:showGarage', (player, garageId) => {
 });
 
 const showGarage = async (player, garageId) => {
-  let vehicles = await db().collection('vehicles').find({}).toArray();
+  let vehicles = await db().collection('vehicles').find({ type: "car"}).toArray();
+  vehicles = vehicles.map(v => {
+    return {
+      ...v,
+      _id: v._id.toString()
+    }
+  })
   alt.emitClient(player, 'garage:show', vehicles, garageId);
 }
 
@@ -125,14 +131,14 @@ const getCordinates = (player) => {
   return cordinates;
 }
 
-alt.onClient('garage:spawnVehicle', (player, modelName, garageId) => {
+alt.onClient('garage:spawnVehicle', (player, vehicle, garageId) => {
   const type = player.getMeta('type');
   if (type == 'guard') {
-    spawnVehicle(player, modelName, garageId);
+    spawnVehicle(player, vehicle.model, garageId);
   }
 });
 
-const spawnVehicle = (player, modelName, garageId) => {
+const spawnVehicle = (player, model, garageId) => {
   let vehicle;
   let spawn;
 
@@ -153,7 +159,7 @@ const spawnVehicle = (player, modelName, garageId) => {
   }
 
   try {
-    vehicle = new alt.Vehicle(modelName, spawn.pos, spawn.rot);
+    vehicle = new alt.Vehicle(model, spawn.pos, spawn.rot);
     vehicle.lockState = 2;
     vehicle.setSyncedMeta('owner', player.id);
     vehicle.sirenActive = true;

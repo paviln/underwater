@@ -26,8 +26,8 @@ const showGarage = () => {
     isGarageOpen = false;
   });
 
-  webview.on('garage:spawnVehicle', (modelName) => {
-    alt.emitServerRaw('garage:spawnVehicle', modelName, garageId);
+  webview.on('garage:spawnVehicle', (vehicle) => {
+    alt.emitServerRaw('garage:spawnVehicle', vehicle, garageId);
   });
 };
 
