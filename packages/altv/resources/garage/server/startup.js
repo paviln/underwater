@@ -1,3 +1,4 @@
+/// <reference types="@altv/types-server" />
 import alt from 'alt-server';
 import * as chat from 'chat';
 import { db, connect } from 'db';
@@ -134,11 +135,11 @@ const getCordinates = (player) => {
 alt.onClient('garage:spawnVehicle', (player, vehicle, garageId) => {
   const type = player.getMeta('type');
   if (type == 'guard') {
-    spawnVehicle(player, vehicle.model, garageId);
+    spawnVehicle(player, vehicle, garageId);
   }
 });
 
-const spawnVehicle = (player, model, garageId) => {
+const spawnVehicle = (player, vehicleData, garageId) => {
   let vehicle;
   let spawn;
 
@@ -159,10 +160,12 @@ const spawnVehicle = (player, model, garageId) => {
   }
 
   try {
-    vehicle = new alt.Vehicle(model, spawn.pos, spawn.rot);
+    vehicle = new alt.Vehicle(vehicleData.model, spawn.pos, spawn.rot);
     vehicle.lockState = 2;
     vehicle.setSyncedMeta('owner', player.id);
     vehicle.sirenActive = true;
+    vehicle.numberPlateIndex = 0;
+    vehicle.numberPlateText = vehicleData.numberPlate;
     alt.emitClientRaw(player, 'snackbar:create', 'timer', 'success', 'Vehicle has been spawned!');
   } catch (err) {
     console.log(err)
